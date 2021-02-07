@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="production"
+            type="com.rishav.tmdbapp.data.ProductionCompany" />
+    </data>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/padding_small"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_small"
+    android:background="?attr/colorSurface">
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="@dimen/production_width"
+        android:layout_height="@dimen/production_height"
+        tools:src="@sample/sample_posters"
+        app:posterUrl="@{`https://image.tmdb.org/t/p/w500`+ production.logoPath}"
+        app:layout_constraintBottom_toBottomOf="@+id/guide_horizontal_2"
+        app:layout_constraintLeft_toLeftOf="@+id/guide_vertical_1"/>
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@{production.name}"
+        android:ellipsize="end"/>
+</LinearLayout>
+</layout>

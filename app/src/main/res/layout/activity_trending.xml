@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.TrendingActivity">
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.rishav.tmdbapp.viewmodel.TrendingActivityViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface">
+
+    <androidx.constraintlayout.helper.widget.Layer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="tv_sort_label,sp_sort"
+        android:background="@drawable/spinner_background"/>
+
+    <TextView
+        android:id="@+id/tv_sort_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sort_by"
+        android:layout_marginRight="@dimen/padding_small"
+        android:paddingLeft="@dimen/padding_medium"
+        app:layout_constraintTop_toTopOf="@+id/sp_sort"
+        app:layout_constraintBottom_toBottomOf="@+id/sp_sort"
+        app:layout_constraintRight_toLeftOf="@+id/sp_sort"/>
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/sp_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/sort_menu"
+        android:selectedItemPosition="@={viewModel.sortSpinnerPosition}"
+        android:layout_marginRight="@dimen/padding_medium"
+        android:layout_marginTop="@dimen/rounded_small"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_movie"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/movie_list_item"
+        app:isVisible="@{viewModel.isListVisible}"
+        app:layout_constraintTop_toBottomOf="@+id/sp_sort"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:isVisible="@{viewModel.isProgressBarVisible()}"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
